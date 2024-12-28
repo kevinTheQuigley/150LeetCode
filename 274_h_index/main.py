@@ -18,45 +18,15 @@ Example 2:
 Input: citations = [1,3,1]
 Output: 1
 """
-
-
 class Solution(object):
-    def canJump(self, nums):
-        jump = 0
-        li = len(nums)
-        for i in range(li):
-            print(i,jump,li)
-            if jump < nums[i]:
-                jump = nums[i]
-        if jump>= li:
-            return True
-        else:
-            return False
-
-#        if nums[0] ==0:
-#            move = 0
-#        else:
-#            move = nums[0]-1
-#        index = 0
-#        le= len(nums)
-#        atEnd =False
-#        while atEnd ==False:
-#            print(index,move,le)
-#            index += move
-#            if index >= le-1:
-#                return True
-#                atEnd=True
-#            move = nums[index]
-#            if move == 0:
-#                return False
-#                atEnd = True
-
-#prices = [7,6,4,3,1] 
-prices = [3,2,1,0,4]
-prices = [2,3,1,1,4]
-prices = [0]
-prices = [2,5,0,0]
-prices = [2,0,0]
-
+    def hIndex(self, citations):
+        sortedCits = citations
+        """
+        :type citations: List[int]
+        :rtype: int
+        """
+        
+citations = [1,3,1]
+citations = [3,0,6,1,5]
 the_solution = Solution()
-print(the_solution.canJump(prices)) 
+print(the_solution.hIndex(citations)) 
