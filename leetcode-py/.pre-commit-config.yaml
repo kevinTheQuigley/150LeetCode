@@ -1,0 +1,26 @@
+repos:
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v6.0.0
+      hooks:
+          - id: trailing-whitespace
+          - id: end-of-file-fixer
+          - id: check-yaml
+          - id: check-added-large-files
+            args: ["--maxkb=20000"]
+    - repo: https://github.com/gitleaks/gitleaks
+      rev: v8.30.0
+      hooks:
+          - name: gitleaks
+            id: gitleaks
+    - repo: local
+      hooks:
+          - id: nb-to-py
+            name: convert notebooks to python
+            entry: bake nb-to-py
+            language: system
+            pass_filenames: false
+          - id: lint
+            name: lint
+            entry: bake lint
+            language: system
+            pass_filenames: false

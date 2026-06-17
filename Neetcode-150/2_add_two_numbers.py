@@ -25,6 +25,79 @@ Constraints:
 The number of nodes in each linked list is in the range [1, 100].
 0 <= Node.val <= 9
 It is guaranteed that the list represents a number that does not have leading zeros.
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+
+
+'''
+
+
+'''
+Need to be able to use listNodes, track remainders and work to continue to add them.
+
+use a dummy at the start, iterate over, adding the remainder and the latest values again and again
+
+'''
+
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy=ListNode()
+        firstDummy=ListNode(next=dummy)
+        remainder=0
+
+        while l1 or l2 or remainder:
+            dummy.next=ListNode()
+            dummy=dummy.next
+            total=0
+            if l1:
+                total+=l1.val
+                l1=l1.next
+            if l2:
+                total+=l2.val
+                l2=l2.next
+            if remainder:
+                total+=remainder
+            
+            dummy.val = total%10
+            remainder = total//10
+            
+
+
+        return firstDummy.next.next
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 
 
  Definition for singly-linked list.

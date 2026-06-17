@@ -39,19 +39,48 @@ class Solution:
 
 
 '''
+
 '''
 
 This is a type of dynamic programming solution -> Key part I didn't understand before was about how a* can match "" or "a" or "aa"
 
 example 
-a*a*b
-daab
-    ""  a   *   a   *   b
+c*a*b
+aab
+
+p on top - corresponds to i
+s on side - corresponds to j
+d[j][i]
+    ""  c   *   a   *   b
 ""  1   0   1   0   1   0
-d   0   0   1   0   1   0
-a   0   0   1   1   1   0
-a   0   0   1   1   1   0
+a   0   0   0   1   1   0
+a   0   0   0   1   1   0
 b   0   0   0   0   0   1
+
+
+Think of every condition verbally
+If current i==j AND previous link was true
+
+if i-1=*
+    Get 
+
+Need to create the if/else conditions that will match the series of conditions that we have created
+
+Create a while loop to loop over the d[j][i] so we can always check the negative value
+
+One confusing part about my solution is that it jumps around a little. 
+Focus on looking at what the current i,j evaluates to.
+Don't jump back and forth
+
+if d[i-1][j-1] ==1
+    -p[i]==s[j] 
+    -p[i]=="."
+    -p[i]=="*"
+Another extra rule 
+p[i]=="*"
+    -p[i-1]==s[j]
+
+I think that covers everything
 
 if strings are equal 
 

@@ -26,6 +26,51 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
 '''
+
+'''
+
+
+'''
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+
+        num_set=set()
+
+        l=0
+        r=0
+        max_rl=r-l
+        returnString =""
+        while r < len(s):
+            if s[r] in num_set:
+                num_set.remove(s[l])
+                l+=1
+            num_set.add(s[r])
+            
+            r+=1
+            if r-l>max_rl:
+                max_rl = r-l
+        return max_rl
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 '''
 Create a set, add and remove chars from the set as you progress
 
@@ -39,20 +84,19 @@ class Solution:
         left =0
         right=0
         maxCharLen=0
-        maxChar=""
 
         while right <len(s):
-            if s[right] in char_set:
+            while s[right] in char_set:
                 char_set.remove(s[left])
                 left+=1
             char_set.add(s[right])
             right+=1
             charLen=right-left
             if charLen>maxCharLen:
-                maxChar=s[left:right+1]
                 maxCharLen=charLen
+                print(left,right)
         
-        return maxChar
+        return maxCharLen
 
 
 

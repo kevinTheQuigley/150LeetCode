@@ -36,7 +36,186 @@ class Solution:
 
 
 '''
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        n1=len(nums1)
+        n2 = len(nums2)
+
+        if n1>n2:
+            return self.findMedianSortedArrays(nums2,nums1)
+        
+        par = n1+n2/2
+
+        bl1 = 0
+        br1 = n1-1
+
+        while bl1 <br1:
+            
+            l1 = (bl1+br1)//2
+
+            r1 = (l1+1)
+            
+
+            l2 = par-l1
+            r2 = (l1+1)
+            
+            if l1 <0:
+                l1Val = -inf
+            elif r1 > n1-1:
+                r1Val = inf
+            if l2 <0:
+                l2Val = -inf
+            if r2 >n2-1:
+                r2Val = inf
+            
+            if l1Val > r2Val:
+                br1 = l1-1
+            elif l2Val >r1Val:
+                bl1 = l1+1
+
+        if par%2==0:
+            return (max(l1Val,l2Val)+min(r1Val,r2Val))/2
+        else:
+            return (max (l1Val,l2Val))
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        n1= len(nums1)
+        n2= len(nums2)
+
+        if n2>n1:
+            return self.findMedianSortedArrays(n2,n1)
+
+        part = (n1+n2)//2
+
+        bl1=0
+        br1=n1-1
+
+        while bl1 < br1:
+            l1 = (bl1+br1)//2
+            r1 = l1+1
+
+
+            l2 = part-l1
+            r2 = l2+1
+
+            if nums1[l1] > nums2[r2]:
+                br1=l1-1
+            elif nums1[r1] < nums2[l2]:
+                bl1=r1+1
+            else:
+                return (max(nums1[l1],nums2[l2])+min(nums1[r1],nums2[r2]))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 from math import inf
+
+
+
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+
+        n1 = len(nums1)
+        n2 = len(nums2)
+        # start with the largest one as nums1
+
+        if n2>n1:
+            return self.findMedianSortedArrays(nums2,nums1)
+        
+        part=(n1+n2)/2
+
+        bl1=0
+        br1=n1-1
+
+        bl2=0
+        br2=br1-part
+
+        l1= int((br1-bl1)/2)
+        r1=l1+1
+
+        l2 = int((bl2+br2)/2)
+        r2 = l2+1
+
+        while nums1[l1]>nums2[r2] or nums1[r1]< nums2[r2]:
+
+            if nums1[l1] >nums2[r2]:
+                br1=l1-1
+            else:
+                bl1=l1+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
@@ -68,13 +247,13 @@ class Solution:
             if  (part-mid)> 0:
                 l2 = nums2[part-mid-1]
             
-            if (l1 <r1) and (l2<r2):
+            if (l1 <r2) and (l2<r1):
                 if n%2==0:
                     return (max(l1,l2)+min(r1,r2))/2
                 else:
                     return (max(l1,l2))
                 
-            if l1>l2:
+            if l1>r2:
                 bdl=mid+1
             else:
                 bdr=mid-1

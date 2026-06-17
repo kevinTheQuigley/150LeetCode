@@ -69,7 +69,7 @@ class Solution:
                 dummyNode.next=list2
             else:
                 dummyNode.next=list1
-        return headNode
+        return headNode.next
             
 
 

@@ -68,7 +68,7 @@ class Solution:
             firstPointer=firstPointer.next
             secondPointer=secondPointer.next
             
-        if secondPointer is head:
+        if secondPointer.next is head:
             return head.next 
         else:
             secondPointer.next = secondPointer.next.next

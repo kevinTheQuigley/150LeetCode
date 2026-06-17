@@ -43,17 +43,18 @@ class Solution:
         if x<0:
             bound = lower
             isNeg=True
+            x*=-1
         else:
             isNeg=False
             bound=upper
         
-        
+         
         while 0<x<bound:
             rev*=10
             rev+=x%10
             x//=10
 
-        if x>bound:
+        if rev>bound:
             return 0
         
         if isNeg:

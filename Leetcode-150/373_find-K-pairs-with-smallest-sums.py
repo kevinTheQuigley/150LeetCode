@@ -1,4 +1,34 @@
 '''
+You are given two integer arrays nums1 and nums2 sorted in non-decreasing order and an integer k.
+
+Define a pair (u, v) which consists of one element from the first array and one element from the second array.
+
+Return the k pairs (u1, v1), (u2, v2), ..., (uk, vk) with the smallest sums.
+
+ 
+
+Example 1:
+
+Input: nums1 = [1,7,11], nums2 = [2,4,6], k = 3
+Output: [[1,2],[1,4],[1,6]]
+Explanation: The first 3 pairs are returned from the sequence: [1,2],[1,4],[1,6],[7,2],[7,4],[11,2],[7,6],[11,4],[11,6]
+Example 2:
+
+Input: nums1 = [1,1,2], nums2 = [1,2,3], k = 2
+Output: [[1,1],[1,1]]
+Explanation: The first 2 pairs are returned from the sequence: [1,1],[1,1],[1,2],[2,1],[1,2],[2,2],[1,3],[1,3],[2,3]
+ 
+
+Constraints:
+
+1 <= nums1.length, nums2.length <= 105
+-109 <= nums1[i], nums2[i] <= 109
+nums1 and nums2 both are sorted in non-decreasing order.
+1 <= k <= 104
+k <= nums1.length * nums2.length
+
+
+
 When picking pairs, you can go either one up, or one down, in either direction:-
 
 [a,1]
@@ -58,6 +88,9 @@ Save as left tuples and right tuples?
 4,5,6,7
 
 
+What is a heap?
+
+I imagine a list, but it's probably more like a binary tree. Every element from left to right is smaller then the next
 
 '''
 
@@ -88,3 +121,21 @@ class Solution:
 
         
 
+'''
+
+Two arrays, find the smallest possible combination.
+
+This is a 'Heap' problem
+
+We start with the most basic solution (0,0) for both lists, then add the values to the heap, tracking them throughout, 
+and popping the top value to track where we are
+
+A dict won't do to track the values. Need to track them within the heap
+
+How to create a heap? - A heap is a Binary tree structure where every sub elemeent has two smaller elements
+
+def node(value):
+
+
+
+'''

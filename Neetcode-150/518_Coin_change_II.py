@@ -51,11 +51,11 @@ class Solution:
         dp[0]=1
 
         for coin in coins:
-            for i in range(amount):
+            for i in range(1,amount+1):
                 if i%coin==0:
-                    dp[i+1]=dp[i+1-coin]
+                    dp[i]+=dp[i-coin]
 
-        return dp[amount+1]
+        return dp[amount]
 
 
 

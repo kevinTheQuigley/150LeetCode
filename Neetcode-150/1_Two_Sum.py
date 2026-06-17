@@ -39,7 +39,7 @@ class Solution:
 
         for i in range(len(nums)):
             if nums[i] in num_set:
-                return [i,num_set[i]]
+                return [i,num_set[nums[i]]]
             num_set[(target-nums[i])]=i
 
 

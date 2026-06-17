@@ -1,0 +1,106 @@
+name: test
+
+on:
+    workflow_call:
+        inputs:
+            target_python_version:
+                description: "Target Python version for SonarQube and Codecov"
+                required: false
+                type: string
+                default: "3.14"
+        secrets:
+            SONAR_TOKEN:
+                required: false
+            CODECOV_TOKEN:
+                required: false
+
+jobs:
+    test:
+        # TODO: Consider adding macOS and Windows to matrix for cross-platform testing
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+
+        steps:
+            - name: checkout
+              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+              with:
+                  fetch-depth: 0
+
+            - name: set-python-version
+              run: echo "${{ matrix.python-version }}" > .python-version
+
+            - name: setup-mise
+              uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4.0.1
+
+            - name: cache-venv
+              env:
+                  CACHE_KEY_PREFIX: venv-${{ github.workflow }}-${{ github.job }}-${{ runner.os }}-py${{ matrix.python-version }}
+                  CACHE_KEY_DEPS: ${{ hashFiles('uv.lock') }}
+              uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+              with:
+                  path: |
+                      ~/.local/share/uv
+                      ~/.cache/uv
+                      ${{ github.workspace }}/.venv
+                  key: ${{ env.CACHE_KEY_PREFIX }}-${{ env.CACHE_KEY_DEPS }}-${{ github.run_id }}-${{ github.run_attempt }}
+                  restore-keys: |
+                      ${{ env.CACHE_KEY_PREFIX }}-${{ env.CACHE_KEY_DEPS }}-${{ github.run_id }}-
+                      ${{ env.CACHE_KEY_PREFIX }}-${{ env.CACHE_KEY_DEPS }}-
+                      ${{ env.CACHE_KEY_PREFIX }}-
+
+            - name: install-dependencies
+              run: uv sync --all-extras --all-groups --frozen
+
+            - name: setup-path
+              run: echo "${{ github.workspace }}/.venv/bin" >> "$GITHUB_PATH"
+
+            - name: cache-graphviz
+              id: cache-graphviz
+              env:
+                  CACHE_KEY_PREFIX: graphviz-${{ github.workflow }}-${{ github.job }}-${{ runner.os }}
+              uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+              with:
+                  path: ~/graphviz-cache
+                  key: ${{ env.CACHE_KEY_PREFIX }}-${{ github.run_id }}-${{ github.run_attempt }}
+                  restore-keys: |
+                      ${{ env.CACHE_KEY_PREFIX }}-${{ github.run_id }}-
+                      ${{ env.CACHE_KEY_PREFIX }}-
+
+            - name: install-graphviz
+              run: |
+                  if [ "${{ steps.cache-graphviz.outputs.cache-hit }}" = "true" ]; then
+                      sudo cp ~/graphviz-cache/bin/* /usr/bin/ 2>/dev/null || true
+                      sudo cp ~/graphviz-cache/lib/* /usr/lib/x86_64-linux-gnu/ 2>/dev/null || true
+                      sudo cp -r ~/graphviz-cache/share/graphviz /usr/share/ 2>/dev/null || true
+                      sudo cp -r ~/graphviz-cache/lib/graphviz /usr/lib/x86_64-linux-gnu/ 2>/dev/null || true
+                      sudo ldconfig
+                      sudo dot -c
+                  else
+                      sudo apt-get update
+                      sudo apt-get install -y graphviz
+                      mkdir -p ~/graphviz-cache/{bin,lib,share}
+                      cp /usr/bin/{dot,neato,twopi,circo,fdp,sfdp,patchwork,osage} ~/graphviz-cache/bin/ 2>/dev/null || true
+                      cp /usr/lib/x86_64-linux-gnu/lib{gvc,cgraph,cdt,pathplan,gvpr,lab-gamut,ann,gts}* ~/graphviz-cache/lib/ 2>/dev/null || true
+                      cp -r /usr/lib/x86_64-linux-gnu/graphviz ~/graphviz-cache/lib/ 2>/dev/null || true
+                      cp -r /usr/share/graphviz ~/graphviz-cache/share/ 2>/dev/null || true
+                  fi
+
+            - name: run-tests
+              run: bake test
+
+            - name: upload-coverage-reports-to-codecov
+              if: matrix.python-version == inputs.target_python_version && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
+              uses: codecov/codecov-action@57e3a136b779b570ffcdbf80b3bdc90e7fab3de2 # v6.0.0
+              with:
+                  fail_ci_if_error: true
+                  token: ${{ secrets.CODECOV_TOKEN }}
+                  verbose: true
+
+            - name: sonarqube-scan
+              if: matrix.python-version == inputs.target_python_version && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
+              uses: SonarSource/sonarqube-scan-action@59db25f34e16620e48ab4bb9e4a5dce155cb5432 # v8.0.0
+              env:
+                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

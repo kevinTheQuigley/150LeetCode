@@ -52,6 +52,59 @@ class Solution:
 '''
 
 '''
+
+'''
+
+class Solution:
+    def threeSum(self, nums: list[int]) -> list[list[int]]:
+
+        nums.sort()
+        # Saves us having to do any tricky pointer tracking. Just work in from the ends 
+
+        
+        for i in range(len(nums)):
+            i_val=nums[i]
+            j=i+1
+            k=len(nums)-1
+            returnList = []
+
+            while j<k:
+
+                j_val = nums[j]
+                k_val = nums[k]
+
+                total_val = i_val+j_val+k_val
+
+
+                if total_val ==0:
+                    returnList.append([i_val,j_val,k_val])
+                    k-=1
+                elif total_val>0:
+                    k-=1
+                else:
+                    j+=1
+        return returnList
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 I recall two ways of solving this. one way involves two pointers, and
  gradually iterating through them towards eachother.
 The other would involve three pointers.
