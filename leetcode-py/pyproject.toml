@@ -80,6 +80,7 @@ per_rule_ignores = {DEP002 = ["chardet"]}
 [tool.pytest.ini_options]
 testpaths = ["leetcode", "tests"]
 norecursedirs = ["src/leetcode_py/cli/resources"]
+addopts = "--import-mode=importlib"
 
 [tool.ruff]
 line-length = 100
