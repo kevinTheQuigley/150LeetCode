@@ -5,13 +5,65 @@
 This is a 
 
 
+focus on splitting the function into pieces 
+
+
+a       b       c...
+current next    ...
+
 '''
 
-
+# A lot of variables here
 from leetcode_py import ListNode
 
 
 
+
+class Solution:
+    # Time: O(?)
+    # Space: O(?)
+    def reverse_k_group(self, head: ListNode[int] | None, k: int) -> ListNode[int] | None:
+        dummy = ListNode(next = head,val=None)
+        firstDummy = dummy
+
+        currentNode = head
+
+        i = k
+
+        stack = []
+        while currentNode is not None:
+
+            stack.append(currentNode)
+            nextNode = currentNode.next
+            if i==1:
+
+                while len(stack)>0:
+
+                    dummy.next = stack.pop()
+                    dummy=dummy.next
+
+                dummy.next = nextNode
+
+                i=k
+            else:
+
+                i-=1
+            currentNode = nextNode
+        return firstDummy.next
+
+
+
+            
+
+
+
+
+
+
+
+
+
+'''
 class Solution:
     # Time: O(?)
     # Space: O(?)
@@ -42,3 +94,4 @@ class Solution:
                 stack = []
         return dummy.next
 
+'''
