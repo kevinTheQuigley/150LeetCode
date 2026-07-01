@@ -1,0 +1,2 @@
+Run each test from the leetcode-py folder using 
+uv run python -m pytest neetcode-150/3_longest_substring_without_repeating_characters/
