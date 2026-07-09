@@ -19,6 +19,17 @@ create a counter that will check what the minimum jumps to get to a point are?
 2:[1,2]
 3:
 
+
+class Solution:
+    # Time: O(?)
+    # Space: O(?)
+    def jump(self, nums: list[int]) -> int:
+        return jumps
+
+
+
+need to create a counter
+
 '''
 
 
@@ -26,21 +37,22 @@ class Solution:
     # Time: O(?)
     # Space: O(?)
     def jump(self, nums: list[int]) -> int:
-        # TODO: Implement jump - example nums = [2,3,1,1,4] Output: 2
-        jumps=0
-        furthest=0
-        current_jump_max=0
-        n = len(nums)
+        jumps = 0 
+        furthest = 0
+        current_max = 0
+        n = len(nums) -1
+        current=0
 
-        for i in range(n-1):
-            furthest = max(furthest,i+nums[i])
+        while current_max<n:
 
-            if i == current_jump_max:
+            furthest = max(furthest,current+nums[current])
+
+            if current > current_max:
                 jumps+=1
-                current_jump_max = furthest
+                current_max = furthest
+            current+=1
             
-                if current_jump_max >=n-1:
-                    break
+
         return jumps
 
             
