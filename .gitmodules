@@ -1,0 +1,3 @@
+[submodule "leetcode-py"]
+	path = leetcode-py
+	url = https://github.com/wislertt/leetcode-py
