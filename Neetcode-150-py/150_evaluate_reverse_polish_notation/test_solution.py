@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_eval_rpn, run_eval_rpn
-from .solution import Solution
+try:
+    from .helpers import assert_eval_rpn, run_eval_rpn
+except ImportError:
+    from helpers import assert_eval_rpn, run_eval_rpn
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestEvaluateReversePolishNotation:

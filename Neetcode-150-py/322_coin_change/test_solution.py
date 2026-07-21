@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_coin_change, run_coin_change
-from .solution import Solution
+try:
+    from .helpers import assert_coin_change, run_coin_change
+except ImportError:
+    from helpers import assert_coin_change, run_coin_change
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestCoinChange:

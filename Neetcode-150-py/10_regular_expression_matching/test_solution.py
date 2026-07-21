@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_is_match, run_is_match
-from .solution import Solution
+try:
+    from .helpers import assert_is_match, run_is_match
+except ImportError:
+    from helpers import assert_is_match, run_is_match
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestRegularExpressionMatching:

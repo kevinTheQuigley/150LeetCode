@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_partition, run_partition
-from .solution import Solution
+try:
+    from .helpers import assert_partition, run_partition
+except ImportError:
+    from helpers import assert_partition, run_partition
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestPalindromePartitioning:

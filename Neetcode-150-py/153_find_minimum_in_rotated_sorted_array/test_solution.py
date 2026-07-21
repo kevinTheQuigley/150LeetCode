@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_find_min, run_find_min
-from .solution import Solution
+try:
+    from .helpers import assert_find_min, run_find_min
+except ImportError:
+    from helpers import assert_find_min, run_find_min
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestFindMinimumInRotatedSortedArray:

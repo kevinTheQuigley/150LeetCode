@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_find_median_sorted_arrays, run_find_median_sorted_arrays
-from .solution import Solution
+try:
+    from .helpers import assert_find_median_sorted_arrays, run_find_median_sorted_arrays
+except ImportError:
+    from helpers import assert_find_median_sorted_arrays, run_find_median_sorted_arrays
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestMedianOfTwoSortedArrays:

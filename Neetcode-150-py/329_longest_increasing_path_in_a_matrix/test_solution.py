@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_longest_increasing_path, run_longest_increasing_path
-from .solution import Solution
+try:
+    from .helpers import assert_longest_increasing_path, run_longest_increasing_path
+except ImportError:
+    from helpers import assert_longest_increasing_path, run_longest_increasing_path
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestTestLongestIncreasingPathInAMatrix:

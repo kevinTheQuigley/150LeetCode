@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_character_replacement, run_character_replacement
-from .solution import Solution
+try:
+    from .helpers import assert_character_replacement, run_character_replacement
+except ImportError:
+    from helpers import assert_character_replacement, run_character_replacement
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestLongestRepeatingCharacterReplacement:

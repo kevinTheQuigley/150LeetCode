@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_multiply, run_multiply
-from .solution import Solution
+try:
+    from .helpers import assert_multiply, run_multiply
+except ImportError:
+    from helpers import assert_multiply, run_multiply
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestMultiplyStrings:

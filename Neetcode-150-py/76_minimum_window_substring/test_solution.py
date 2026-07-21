@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_min_window, run_min_window
-from .solution import Solution
+try:
+    from .helpers import assert_min_window, run_min_window
+except ImportError:
+    from helpers import assert_min_window, run_min_window
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestMinimumWindowSubstring:

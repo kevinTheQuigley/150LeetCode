@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_jump, run_jump
-from .solution import Solution
+try:
+    from .helpers import assert_jump, run_jump
+except ImportError:
+    from helpers import assert_jump, run_jump
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestJumpGameIi:

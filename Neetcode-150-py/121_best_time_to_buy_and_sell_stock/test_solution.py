@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_max_profit, run_max_profit
-from .solution import Solution
+try:
+    from .helpers import assert_max_profit, run_max_profit
+except ImportError:
+    from helpers import assert_max_profit, run_max_profit
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestBestTimeToBuyAndSellStock:

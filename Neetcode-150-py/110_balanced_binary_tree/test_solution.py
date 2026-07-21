@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_is_balanced, run_is_balanced
-from .solution import Solution
+try:
+    from .helpers import assert_is_balanced, run_is_balanced
+except ImportError:
+    from helpers import assert_is_balanced, run_is_balanced
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestBalancedBinaryTree:

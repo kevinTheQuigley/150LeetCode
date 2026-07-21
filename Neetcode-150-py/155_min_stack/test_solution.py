@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_min_stack_operations, run_min_stack_operations
-from .solution import MinStack
+try:
+    from .helpers import assert_min_stack_operations, run_min_stack_operations
+except ImportError:
+    from helpers import assert_min_stack_operations, run_min_stack_operations
+try:
+    from .solution import MinStack
+except ImportError:
+    from solution import MinStack
 
 
 class TestTestMinStack:

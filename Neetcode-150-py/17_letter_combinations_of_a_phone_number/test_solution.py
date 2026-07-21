@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_letter_combinations, run_letter_combinations
-from .solution import Solution
+try:
+    from .helpers import assert_letter_combinations, run_letter_combinations
+except ImportError:
+    from helpers import assert_letter_combinations, run_letter_combinations
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestLetterCombinationsOfAPhoneNumber:

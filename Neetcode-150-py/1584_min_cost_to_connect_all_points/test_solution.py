@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_min_cost_connect_points, run_min_cost_connect_points
-from .solution import Solution
+try:
+    from .helpers import assert_min_cost_connect_points, run_min_cost_connect_points
+except ImportError:
+    from helpers import assert_min_cost_connect_points, run_min_cost_connect_points
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestTestMinCostToConnectAllPoints:

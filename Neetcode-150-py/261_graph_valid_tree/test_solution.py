@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_valid_tree, run_valid_tree
-from .solution import Solution
+try:
+    from .helpers import assert_valid_tree, run_valid_tree
+except ImportError:
+    from helpers import assert_valid_tree, run_valid_tree
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestGraphValidTree:

@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_can_attend_meetings, run_can_attend_meetings
-from .solution import Solution
+try:
+    from .helpers import assert_can_attend_meetings, run_can_attend_meetings
+except ImportError:
+    from helpers import assert_can_attend_meetings, run_can_attend_meetings
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestMeetingRooms:

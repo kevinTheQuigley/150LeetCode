@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_count_substrings, run_count_substrings
-from .solution import Solution
+try:
+    from .helpers import assert_count_substrings, run_count_substrings
+except ImportError:
+    from helpers import assert_count_substrings, run_count_substrings
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestPalindromicSubstrings:

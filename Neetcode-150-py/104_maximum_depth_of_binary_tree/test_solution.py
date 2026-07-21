@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_max_depth, run_max_depth
-from .solution import Solution
+try:
+    from .helpers import assert_max_depth, run_max_depth
+except ImportError:
+    from helpers import assert_max_depth, run_max_depth
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestMaximumDepthOfBinaryTree:

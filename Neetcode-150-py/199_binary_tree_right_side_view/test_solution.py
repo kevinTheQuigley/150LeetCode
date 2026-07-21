@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_right_side_view, run_right_side_view
-from .solution import Solution
+try:
+    from .helpers import assert_right_side_view, run_right_side_view
+except ImportError:
+    from helpers import assert_right_side_view, run_right_side_view
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestBinaryTreeRightSideView:

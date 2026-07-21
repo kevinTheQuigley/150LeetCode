@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_daily_temperatures, run_daily_temperatures
-from .solution import Solution
+try:
+    from .helpers import assert_daily_temperatures, run_daily_temperatures
+except ImportError:
+    from helpers import assert_daily_temperatures, run_daily_temperatures
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestDailyTemperatures:

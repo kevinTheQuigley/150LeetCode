@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_contains_duplicate, run_contains_duplicate
-from .solution import Solution
+try:
+    from .helpers import assert_contains_duplicate, run_contains_duplicate
+except ImportError:
+    from helpers import assert_contains_duplicate, run_contains_duplicate
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestContainsDuplicate:

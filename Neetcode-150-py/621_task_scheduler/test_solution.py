@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_least_interval, run_least_interval
-from .solution import Solution
+try:
+    from .helpers import assert_least_interval, run_least_interval
+except ImportError:
+    from helpers import assert_least_interval, run_least_interval
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestTaskScheduler:

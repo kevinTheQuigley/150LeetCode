@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_alien_order, run_alien_order
-from .solution import Solution
+try:
+    from .helpers import assert_alien_order, run_alien_order
+except ImportError:
+    from helpers import assert_alien_order, run_alien_order
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestAlienDictionary:

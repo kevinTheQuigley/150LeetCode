@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_top_k_frequent, run_top_k_frequent
-from .solution import Solution
+try:
+    from .helpers import assert_top_k_frequent, run_top_k_frequent
+except ImportError:
+    from helpers import assert_top_k_frequent, run_top_k_frequent
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestTestTopKFrequentElements:

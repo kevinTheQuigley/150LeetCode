@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_erase_overlap_intervals, run_erase_overlap_intervals
-from .solution import Solution
+try:
+    from .helpers import assert_erase_overlap_intervals, run_erase_overlap_intervals
+except ImportError:
+    from helpers import assert_erase_overlap_intervals, run_erase_overlap_intervals
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestNonOverlappingIntervals:

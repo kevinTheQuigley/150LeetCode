@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_trie_operations, run_trie_operations
-from .solution import Trie
+try:
+    from .helpers import assert_trie_operations, run_trie_operations
+except ImportError:
+    from helpers import assert_trie_operations, run_trie_operations
+try:
+    from .solution import Trie
+except ImportError:
+    from solution import Trie
 
 
 class TestImplementTriePrefixTree:

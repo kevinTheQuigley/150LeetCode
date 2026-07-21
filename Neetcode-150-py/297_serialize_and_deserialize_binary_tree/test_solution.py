@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_serialize_deserialize, run_serialize_deserialize
-from .solution import Codec
+try:
+    from .helpers import assert_serialize_deserialize, run_serialize_deserialize
+except ImportError:
+    from helpers import assert_serialize_deserialize, run_serialize_deserialize
+try:
+    from .solution import Codec
+except ImportError:
+    from solution import Codec
 
 
 class TestSerializeAndDeserializeBinaryTree:

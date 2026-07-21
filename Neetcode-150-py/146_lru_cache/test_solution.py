@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_lru_cache, run_lru_cache
-from .solution import LRUCache
+try:
+    from .helpers import assert_lru_cache, run_lru_cache
+except ImportError:
+    from helpers import assert_lru_cache, run_lru_cache
+try:
+    from .solution import LRUCache
+except ImportError:
+    from solution import LRUCache
 
 
 class TestLRUCache:

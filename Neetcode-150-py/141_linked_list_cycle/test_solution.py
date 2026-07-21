@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_has_cycle, run_has_cycle
-from .solution import Solution
+try:
+    from .helpers import assert_has_cycle, run_has_cycle
+except ImportError:
+    from helpers import assert_has_cycle, run_has_cycle
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestLinkedListCycle:

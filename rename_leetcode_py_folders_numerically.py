@@ -6,7 +6,10 @@ from pathlib import Path
 
 
 README_NAME = "README.md"
+TEST_FILE_NAME = "test_solution.py"
 PROBLEM_NUMBER_PATTERN = re.compile(r"\bProblem\s+(\d+)\b", re.IGNORECASE)
+HELPERS_IMPORT_PATTERN = re.compile(r"(?m)^from \.helpers import (.+)$")
+SOLUTION_IMPORT_PATTERN = re.compile(r"(?m)^from \.solution import (.+)$")
 
 
 def extract_problem_number(readme_path: Path) -> int | None:
@@ -34,11 +37,35 @@ def build_target_name(current_dir: Path, problem_number: int) -> str:
 	return f"{problem_number}_{suffix}"
 
 
+def patch_test_solution_imports(problem_dir: Path) -> bool:
+	"""Patch test imports to work with and without package import context."""
+	test_file = problem_dir / TEST_FILE_NAME
+	if not test_file.exists():
+		return False
+
+	content = test_file.read_text(encoding="utf-8")
+	updated = HELPERS_IMPORT_PATTERN.sub(
+		"try:\n    from .helpers import \\1\nexcept ImportError:\n    from helpers import \\1",
+		content,
+	)
+	updated = SOLUTION_IMPORT_PATTERN.sub(
+		"try:\n    from .solution import \\1\nexcept ImportError:\n    from solution import \\1",
+		updated,
+	)
+
+	if updated == content:
+		return False
+
+	test_file.write_text(updated, encoding="utf-8")
+	return True
+
+
 def rename_problem_directories(root_dir: Path, dry_run: bool = False) -> tuple[int, int, int]:
 	"""Rename immediate child directories using problem numbers from README files."""
 	renamed = 0
 	skipped = 0
 	errors = 0
+	patched = 0
 
 	for child in sorted(root_dir.iterdir(), key=lambda p: p.name.lower()):
 		if not child.is_dir():
@@ -71,7 +98,12 @@ def rename_problem_directories(root_dir: Path, dry_run: bool = False) -> tuple[i
 		print(f"RENAME: {child.name} -> {target_name}")
 		if not dry_run:
 			child.rename(target_path)
+			if patch_test_solution_imports(target_path):
+				patched += 1
 		renamed += 1
+
+	if not dry_run:
+		print(f"PATCHED: {patched} {TEST_FILE_NAME} files")
 
 	return renamed, skipped, errors
 

@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_merge_two_lists, run_merge_two_lists
-from .solution import Solution
+try:
+    from .helpers import assert_merge_two_lists, run_merge_two_lists
+except ImportError:
+    from helpers import assert_merge_two_lists, run_merge_two_lists
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestMergeTwoSortedLists:

@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_can_finish, run_can_finish
-from .solution import Solution
+try:
+    from .helpers import assert_can_finish, run_can_finish
+except ImportError:
+    from helpers import assert_can_finish, run_can_finish
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestCourseSchedule:

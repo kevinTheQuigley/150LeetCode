@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_level_order, run_level_order
-from .solution import Solution
+try:
+    from .helpers import assert_level_order, run_level_order
+except ImportError:
+    from helpers import assert_level_order, run_level_order
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestBinaryTreeLevelOrderTraversal:

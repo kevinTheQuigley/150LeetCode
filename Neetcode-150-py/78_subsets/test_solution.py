@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_subsets, run_subsets
-from .solution import Solution
+try:
+    from .helpers import assert_subsets, run_subsets
+except ImportError:
+    from helpers import assert_subsets, run_subsets
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestSubsets:

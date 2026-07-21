@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_max_area, run_max_area
-from .solution import Solution
+try:
+    from .helpers import assert_max_area, run_max_area
+except ImportError:
+    from helpers import assert_max_area, run_max_area
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestContainerWithMostWater:

@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_median_finder, run_median_finder
-from .solution import MedianFinder
+try:
+    from .helpers import assert_median_finder, run_median_finder
+except ImportError:
+    from helpers import assert_median_finder, run_median_finder
+try:
+    from .solution import MedianFinder
+except ImportError:
+    from solution import MedianFinder
 
 
 class TestFindMedianFromDataStream:

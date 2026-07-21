@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_word_dictionary, run_word_dictionary
-from .solution import WordDictionary
+try:
+    from .helpers import assert_word_dictionary, run_word_dictionary
+except ImportError:
+    from helpers import assert_word_dictionary, run_word_dictionary
+try:
+    from .solution import WordDictionary
+except ImportError:
+    from solution import WordDictionary
 
 
 class TestDesignAddAndSearchWordsDataStructure:

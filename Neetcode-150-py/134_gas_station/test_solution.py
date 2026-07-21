@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_can_complete_circuit, run_can_complete_circuit
-from .solution import Solution
+try:
+    from .helpers import assert_can_complete_circuit, run_can_complete_circuit
+except ImportError:
+    from helpers import assert_can_complete_circuit, run_can_complete_circuit
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestGasStation:

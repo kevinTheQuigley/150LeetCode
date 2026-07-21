@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_combination_sum, run_combination_sum
-from .solution import Solution
+try:
+    from .helpers import assert_combination_sum, run_combination_sum
+except ImportError:
+    from helpers import assert_combination_sum, run_combination_sum
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestCombinationSum:

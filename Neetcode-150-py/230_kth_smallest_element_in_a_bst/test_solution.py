@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_kth_smallest, run_kth_smallest
-from .solution import Solution
+try:
+    from .helpers import assert_kth_smallest, run_kth_smallest
+except ImportError:
+    from helpers import assert_kth_smallest, run_kth_smallest
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestKthSmallestElementInABst:

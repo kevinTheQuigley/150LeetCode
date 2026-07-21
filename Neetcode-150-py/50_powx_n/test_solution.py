@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_my_pow, run_my_pow
-from .solution import Solution
+try:
+    from .helpers import assert_my_pow, run_my_pow
+except ImportError:
+    from helpers import assert_my_pow, run_my_pow
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestPowXN:

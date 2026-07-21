@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_find_duplicate, run_find_duplicate
-from .solution import Solution
+try:
+    from .helpers import assert_find_duplicate, run_find_duplicate
+except ImportError:
+    from helpers import assert_find_duplicate, run_find_duplicate
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestFindTheDuplicateNumber:

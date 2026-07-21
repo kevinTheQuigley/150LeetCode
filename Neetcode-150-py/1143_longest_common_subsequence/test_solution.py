@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_longest_common_subsequence, run_longest_common_subsequence
-from .solution import Solution
+try:
+    from .helpers import assert_longest_common_subsequence, run_longest_common_subsequence
+except ImportError:
+    from helpers import assert_longest_common_subsequence, run_longest_common_subsequence
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestLongestCommonSubsequence:

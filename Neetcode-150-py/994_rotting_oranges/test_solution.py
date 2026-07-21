@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_oranges_rotting, run_oranges_rotting
-from .solution import Solution
+try:
+    from .helpers import assert_oranges_rotting, run_oranges_rotting
+except ImportError:
+    from helpers import assert_oranges_rotting, run_oranges_rotting
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestRottingOranges:

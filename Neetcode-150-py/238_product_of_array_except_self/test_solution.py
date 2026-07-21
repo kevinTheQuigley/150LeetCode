@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_product_except_self, run_product_except_self
-from .solution import Solution
+try:
+    from .helpers import assert_product_except_self, run_product_except_self
+except ImportError:
+    from helpers import assert_product_except_self, run_product_except_self
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestProductOfArrayExceptSelf:

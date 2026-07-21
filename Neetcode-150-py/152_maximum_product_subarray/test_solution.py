@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_max_product, run_max_product
-from .solution import Solution
+try:
+    from .helpers import assert_max_product, run_max_product
+except ImportError:
+    from helpers import assert_max_product, run_max_product
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestMaximumProductSubarray:

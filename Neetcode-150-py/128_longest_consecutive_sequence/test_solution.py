@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_longest_consecutive, run_longest_consecutive
-from .solution import Solution
+try:
+    from .helpers import assert_longest_consecutive, run_longest_consecutive
+except ImportError:
+    from helpers import assert_longest_consecutive, run_longest_consecutive
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestLongestConsecutiveSequence:

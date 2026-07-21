@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_is_subtree, run_is_subtree
-from .solution import Solution
+try:
+    from .helpers import assert_is_subtree, run_is_subtree
+except ImportError:
+    from helpers import assert_is_subtree, run_is_subtree
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestSubtreeOfAnotherTree:

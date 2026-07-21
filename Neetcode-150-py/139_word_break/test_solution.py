@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_word_break, run_word_break
-from .solution import Solution
+try:
+    from .helpers import assert_word_break, run_word_break
+except ImportError:
+    from helpers import assert_word_break, run_word_break
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestWordBreak:

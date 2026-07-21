@@ -2,8 +2,14 @@ import pytest
 
 from leetcode_py import logged_test
 
-from .helpers import assert_k_closest, run_k_closest
-from .solution import Solution
+try:
+    from .helpers import assert_k_closest, run_k_closest
+except ImportError:
+    from helpers import assert_k_closest, run_k_closest
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
 class TestKClosestPointsToOrigin:
